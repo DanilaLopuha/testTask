@@ -1,6 +1,8 @@
 import React from 'react';
+import { Tab, Tabs } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Square extends React.Component {
   render() {
@@ -54,14 +56,39 @@ class Game extends React.Component {
           <div>{/* status */}</div>
           <ol>{/* TODO */}</ol>
         </div>
+        <TabExample />
       </div>
     );
   }
 }
 
+class SampleText extends React.Component{
+  render(){
+    return(
+      <div>Hello world!</div>
+    );
+  }
+}
+
+class TabExample extends React.Component{
+  render(){
+    return(
+      <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+  <Tab eventKey="home" title="Home">
+    <SampleText />
+  </Tab>
+  <Tab eventKey="profile" title="Profile">
+  <SampleText />
+  </Tab>
+</Tabs>
+    );
+  }
+}
+ 
+
 // ========================================
 
 ReactDOM.render(
-  <Game />,
+  <TabExample />,
   document.getElementById('root')
 );

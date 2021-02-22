@@ -4,8 +4,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import '@devexpress/dx-react-chart-bootstrap4/dist/dx-react-chart-bootstrap4.css';
-// import Charts from "./charts/charts";
-import TabExample from './table/table';
+import TabExample from './Tabs/tabs';
 
 
 // ========================================

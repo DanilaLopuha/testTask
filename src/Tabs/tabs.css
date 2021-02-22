@@ -1,0 +1,8 @@
+.row{
+    width: 100%;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-left: 3px, solid, black;
+}

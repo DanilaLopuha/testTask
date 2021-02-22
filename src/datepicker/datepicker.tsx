@@ -1,5 +1,6 @@
 import React from "react";
 import DatePicker from "react-datepicker";
+
 import "react-datepicker/dist/react-datepicker.css";
 
 
@@ -9,8 +10,7 @@ import "react-datepicker/dist/react-datepicker.css";
     };
   
     render() {
-      const { startDate } = this.state;
-      return <DatePicker selected={startDate} onChange={this.handleChange} />;
+      return <DatePicker selected={this.state.startDate} onChange={(date) => {this.handleChange(date as Date);}} />;
     }
   
     handleChange(startDate: Date) {

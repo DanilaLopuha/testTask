@@ -8,6 +8,23 @@ import { TableTest } from '../table/table';
 import TestHttpCall from '../httpGET/httpGet';
 
 class TabExample extends React.Component {
+    state = {
+        rawData: [],
+        data: []
+    };
+    componentDidMount(): void {
+        const url = "/covid19/casedistribution/json/";
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json'
+              },
+          }).then(data => data.json()).then(response => {
+              console.log(response);
+          });
+    }
+
     render() {
         return (
             <div className="tabs">

@@ -4,6 +4,9 @@ body {
     font: 14px "Century Gothic", Futura, sans-serif;
     margin: 20px;
   }
+  #root{
+    height: 100%;
+  }
   
   ol, ul {
     padding-left: 30px;

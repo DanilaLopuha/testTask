@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
+    "@types/express": "^4.17.11",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.31",
     "@types/react": "^17.0.2",
@@ -16,9 +17,12 @@
     "@types/react-dom": "^17.0.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.19.1",
     "lodash": "^4.17.21",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.0",
+    "react-data-grid": "^7.0.0-canary.36",
     "react-datepicker": "^3.5.0",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
@@ -27,7 +31,7 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start --verbose",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -50,7 +54,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000",
+  "proxy": "https://opendata.ecdc.europa.eu",
   "devDependencies": {
     "@types/lodash": "^4.14.168",
     "@types/react-router-dom": "^5.1.7"

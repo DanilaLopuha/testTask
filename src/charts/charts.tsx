@@ -16,7 +16,7 @@ import './charts.css';
 
 export class ChartTest extends React.Component {
     chartsData = [
-        { argument: 1, value: 30 },
+        { argument: 1, value: 30, state: 'test' },
         { argument: 2, value: 10 },
         { argument: 3, value: 20 },
     ];

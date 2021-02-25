@@ -1,10 +1,28 @@
 import React from "react";
 import { Table } from "react-bootstrap";
-
+import './table.css'
 
 export class TableTest extends React.Component {
     render() {
+        
         return (
+            <div>
+                 <div className="options">
+                            <div>
+                                <input placeholder="country search"></input>
+                                <button>search</button>
+                            </div>
+                            <select placeholder="filter by column">
+                                <option>Column1</option>
+                                <option>Column2</option>
+                                <option>Column3</option>
+                            </select>
+                            <input placeholder="from"></input>
+                            <input placeholder="to"></input>
+                        </div>
+                            <div className="clearFilters">
+                            <button>Clear filters</button>
+                        </div>
             < Table striped bordered hover >
                 <thead>
                     <tr>
@@ -29,6 +47,7 @@ export class TableTest extends React.Component {
                     </tr>
                 </tbody>
             </Table >
+            </div>
         )
     }
 

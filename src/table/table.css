@@ -1,0 +1,19 @@
+th{
+    background-color: blanchedalmond;
+}
+
+td{
+    background-color: rgb(204, 204, 204);
+}
+.options{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 30px 30px 30px 30px;
+}
+
+.clearFilters{
+    display: flex;
+    justify-content: flex-end;
+    margin: 0px 30px 30px 0px;
+}

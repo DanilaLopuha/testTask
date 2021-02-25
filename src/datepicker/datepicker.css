@@ -1,0 +1,7 @@
+.react-datepicker-popper {
+    z-index: 9999;
+  }
+
+.react-datepicker-wrapper{
+  margin: 0px 5px 0px 5px;
+}

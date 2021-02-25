@@ -2,21 +2,22 @@ import React from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import './tabs.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import MyChart from '../charts/charts';
 import MyDatepicker from '../datepicker/datepicker';
-import SampleText from '../tableText/tableText';
 import { ChartTest } from '../charts/charts';
 import { TableTest } from '../table/table';
+import TestHttpCall from '../httpGET/httpGet';
 
 class TabExample extends React.Component {
     render() {
         return (
-            <div>
-                <MyDatepicker />
+            <div className="tabs">
+                <div className="datePick">
+                    Period from <MyDatepicker /> to <MyDatepicker />
+                </div>
                 <Tabs defaultActiveKey="chart">
                     <Tab eventKey="home" title="Home">
-                        <SampleText />
                         <TableTest />
+                        {/* <TestHttpCall /> */}
                     </Tab>
                     <Tab eventKey="chart" title="Chart">
                         <ChartTest />

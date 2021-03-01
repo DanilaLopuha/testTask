@@ -1,5 +1,6 @@
 export interface CovidDataRecord {
     dateRep: string;
+    date: Date;
     day: number;
     month: number;
     year: number;

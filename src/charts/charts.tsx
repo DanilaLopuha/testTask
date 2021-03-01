@@ -14,12 +14,13 @@ import './charts.css';
 //     { argument: 3, value: 30 },
 // ];
 
-export class ChartTest extends React.Component {
+export class ChartTest extends React.Component<any> {
     chartsData = [
         { argument: 1, value: 30, state: 'test' },
         { argument: 2, value: 10 },
         { argument: 3, value: 20 },
     ];
+
     render() {
         return (
             <div className="card">
@@ -29,10 +30,10 @@ export class ChartTest extends React.Component {
                     <option>Lithuania</option>
                 </select>
                 </div>
-                <Chart data={this.chartsData} >
+                <Chart data={this.props.data} >
                     <ArgumentAxis />
                     <ValueAxis />
-                    <LineSeries valueField="value" argumentField="argument" />
+                    <LineSeries valueField="deaths" argumentField="day" />
                 </Chart>
             </div>
         );

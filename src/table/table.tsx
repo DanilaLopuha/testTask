@@ -28,8 +28,12 @@ const columns = [
     { country: 'Latvia', casesAmount: 1203, deathsAmount: 121, casesTotal: 4562, deathsTotal: 722, casesOn1000: 99, deathsOnCases: 123  },
   ];
 
-export class TableTest extends React.Component {
+export class TableTest extends React.Component<any> {
+    constructor(props: any){
+        super(props)
+    }
     render() {
+        // console.log('lets check: ', this.props.data);
         return (
             <div>
                 <div className="options">

@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import DatePicker from "react-datepicker";
 import './datepicker.css';
 
 import "react-datepicker/dist/react-datepicker.css";
 
 
-class MyDatepicker extends React.Component {
+class MyDatepicker extends React.Component<any> {
+  constructor(props: any){
+    super(props)
+  };
   state = {
-    fixedDate: new Date("03/15/2021"),
-    startDate: new Date("03/21/2021"),
-    endDate: new Date("03/29/2021"),
+    fixedDate: new Date(),
+    startDate: this.props.startDate,
+    endDate: this.props.endDate,
   };
 
   render() {
-    // return <DatePicker selected={this.state.startDate} onChange={(date) => { this.setStartDate(date as Date); }} />;
     return (
       <>
       Period from 
@@ -23,12 +25,12 @@ class MyDatepicker extends React.Component {
           selectsStart
           startDate={this.state.startDate}
           endDate={this.state.endDate}
-          minDate={this.state.fixedDate}
+          // minDate={this.state.fixedDate}
         />
         to 
         <DatePicker
           selected={this.state.endDate}
-          onChange={(date) => {this.setEndDate(date as Date)}}
+          onChange={date => {this.setEndDate(date as Date)}}
           selectsEnd
           startDate={this.state.startDate}
           endDate={this.state.endDate}
@@ -42,12 +44,14 @@ class MyDatepicker extends React.Component {
     this.setState({
       startDate
     });
-  };
+    this.props.onDateChange(startDate, this.state.endDate);
+  }
   setEndDate(endDate: Date) {
     this.setState({
       endDate
-    })
-  };
+    });
+    this.props.onDateChange(this.state.startDate, endDate);
+  }
 }
 
 export default MyDatepicker;

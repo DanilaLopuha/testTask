@@ -21,7 +21,10 @@ export class ChartTest extends React.Component<any> {
         { argument: 3, value: 20 },
     ];
 
+
+
     render() {
+        // console.log('let`s check data on charts', this.props.data);
         return (
             <div className="card">
                 <div className="countrySelect">
@@ -33,7 +36,7 @@ export class ChartTest extends React.Component<any> {
                 <Chart data={this.props.data} >
                     <ArgumentAxis />
                     <ValueAxis />
-                    <LineSeries valueField="deaths" argumentField="day" />
+                    <LineSeries valueField="deaths" argumentField="date" />
                 </Chart>
             </div>
         );

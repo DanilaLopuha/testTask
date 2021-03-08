@@ -6,12 +6,13 @@ import MyDatepicker from '../datepicker/datepicker';
 import { ChartTest } from '../charts/charts';
 import { TableTest } from '../table/table';
 import { CovidDataRecord } from '../covidData';
+import _ from 'lodash';
 
 class TabExample extends React.Component<any> {
     constructor(props: any) {
         super(props);
         const date = new Date();
-        this.state.startDate.setFullYear(date.getFullYear() -1, date.getMonth(), date.getDate());
+        this.state.startDate.setFullYear(date.getFullYear() - 1, date.getMonth(), date.getDate());
         this.state.startDate.setHours(0, 0, 0, 0);
     }
     state = {
@@ -20,7 +21,6 @@ class TabExample extends React.Component<any> {
         startDate: new Date(),
         endDate: new Date()
     };
-    // this.testData = this.testData.bind(this);
 
     componentDidMount(): void {
         const url = "/covid19/casedistribution/json/";
@@ -37,7 +37,7 @@ class TabExample extends React.Component<any> {
                 const approxDate = `${item.month}/${item.day}/${item.year}`;
                 item.date = new Date(approxDate);
             }
-            const sorted = testData.sort((a: CovidDataRecord, b: CovidDataRecord) => a.date.getTime() > b.date.getTime() ? 0 : 1);
+            const sorted = testData.sort((a: CovidDataRecord, b: CovidDataRecord) => a.date.getTime() > b.date.getTime() ? 1 : -1);
             this.setState({
                 rawData: sorted,
             });
@@ -45,7 +45,11 @@ class TabExample extends React.Component<any> {
     }
 
     render() {
+        console.log(this.state.rawData);
         const data = this.getFilteredDataItems(this.state.rawData);
+        const countries = _.groupBy(data, function (data) {
+            return data.countriesAndTerritories
+        });
         return (
             <div className="tabs">
                 <div className="datePick">
@@ -61,7 +65,10 @@ class TabExample extends React.Component<any> {
                         {/* <TestHttpCall /> */}
                     </Tab>
                     <Tab eventKey="chart" title="Chart">
-                        <ChartTest data={data} />
+                        <ChartTest
+                            countries = {countries}
+                            data={data}
+                        />
                     </Tab>
                 </Tabs>
             </div>
@@ -73,14 +80,11 @@ class TabExample extends React.Component<any> {
             startDate,
             endDate
         });
-        console.log('startDate and endDate: ', startDate, endDate);
     }
 
     private getFilteredDataItems(raw: CovidDataRecord[]): CovidDataRecord[] {
         let startDate = new Date(this.state.startDate);
         let endDate = new Date(this.state.endDate);
-        console.log(startDate);
-        console.log(endDate)
         // let arythm = Math.abs(startDate - endDate);
         // let days = arythm / (1000 * 60 * 60 * 24);
         let filtered: CovidDataRecord[] = raw.filter(dataRecord => {
@@ -89,7 +93,6 @@ class TabExample extends React.Component<any> {
             }
             return false;
         });
-        console.log(filtered);
         return filtered;
     }
 }

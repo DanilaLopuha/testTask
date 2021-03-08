@@ -6,37 +6,49 @@ import {
     LineSeries,
 } from '@devexpress/dx-react-chart-bootstrap4';
 import './charts.css';
+import _ from 'lodash';
 
-
-// const data = [
-//     { argument: 1, value: 10 },
-//     { argument: 2, value: 20 },
-//     { argument: 3, value: 30 },
-// ];
 
 export class ChartTest extends React.Component<any> {
-    chartsData = [
-        { argument: 1, value: 30, state: 'test' },
-        { argument: 2, value: 10 },
-        { argument: 3, value: 20 },
-    ];
+    constructor(props: any) {
+        super(props);
+    }
+    state = {
+        countries: []
+    }
 
+    componentDidUpdate() {
+        if (this.props.countries !== this.state.countries) {
+            this.setState({
+                countries: this.props.countries
+            })
+        }
+    }
 
+    handleChange(event: { target: { value: any; }; }){
+        this.setState({
+            countries : event.target.value
+        })
+    }
 
     render() {
-        // console.log('let`s check data on charts', this.props.data);
+        const countries = this.state.countries
+        let groupedData: any = { countries };
+        console.log(groupedData.countries);
         return (
-            <div className="card">
+            <div className="card" >
                 <div className="countrySelect">
-                Select Country <select>
-                    <option>Latvia</option>
-                    <option>Lithuania</option>
-                </select>
+                    Select Country
+                <select /*onChange={this.handleChange}*/>
+                        <option>
+                            {groupedData.countries.toString()}
+                        </option>
+                    </select>
                 </div>
-                <Chart data={this.props.data} >
+                <Chart data={this.props.data}>
                     <ArgumentAxis />
                     <ValueAxis />
-                    <LineSeries valueField="deaths" argumentField="date" />
+                    <LineSeries valueField="cases" argumentField="date" />
                 </Chart>
             </div>
         );

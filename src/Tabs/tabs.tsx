@@ -19,7 +19,8 @@ class TabExample extends React.Component<any> {
         rawData: [] as CovidDataRecord[],
         data: [] as CovidDataRecord[],
         startDate: new Date(),
-        endDate: new Date()
+        endDate: new Date(),
+        groupedData: [],
     };
 
     componentDidMount(): void {
@@ -48,8 +49,12 @@ class TabExample extends React.Component<any> {
         console.log(this.state.rawData);
         const data = this.getFilteredDataItems(this.state.rawData);
         const countries = _.groupBy(data, function (data) {
-            return data.countriesAndTerritories
+            return data.countriesAndTerritories;
         });
+        this.setState({
+            groupedData: countries
+        })
+        
         return (
             <div className="tabs">
                 <div className="datePick">
@@ -66,7 +71,7 @@ class TabExample extends React.Component<any> {
                     </Tab>
                     <Tab eventKey="chart" title="Chart">
                         <ChartTest
-                            countries = {countries}
+                            countries={this.state.groupedData}
                             data={data}
                         />
                     </Tab>

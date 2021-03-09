@@ -22,7 +22,6 @@ class TabExample extends React.Component<any> {
         endDate: new Date(),
         groupedData: [],
     };
-
     componentDidMount(): void {
         const url = "/covid19/casedistribution/json/";
         fetch(url, {
@@ -46,15 +45,11 @@ class TabExample extends React.Component<any> {
     }
 
     render() {
-        console.log(this.state.rawData);
         const data = this.getFilteredDataItems(this.state.rawData);
         const countries = _.groupBy(data, function (data) {
             return data.countriesAndTerritories;
         });
-        this.setState({
-            groupedData: countries
-        })
-        
+        console.log('changed data by date on parent component', data);
         return (
             <div className="tabs">
                 <div className="datePick">
@@ -71,7 +66,7 @@ class TabExample extends React.Component<any> {
                     </Tab>
                     <Tab eventKey="chart" title="Chart">
                         <ChartTest
-                            countries={this.state.groupedData}
+                            countries={countries}
                             data={data}
                         />
                     </Tab>

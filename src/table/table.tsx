@@ -1,4 +1,4 @@
-import React from "react";
+import React, {MouseEvent} from "react";
 import './table.css';
 import { DataGrid, GridColDef, GridRowsProp, GridSortDirection } from '@material-ui/data-grid';
 
@@ -17,15 +17,16 @@ const columns: GridColDef[] = [
 
 export class TableTest extends React.Component<any> {
     constructor(props: any) {
-        super(props)
+        super(props);
+        this.click = this.click.bind(this)
     }
     state = {
         countries: [],
         gridData: [],
         option: '',
-        rangeFrom: 0,
-        rangeTo: 9999999,
-        }
+        rangeFrom: '',
+        rangeTo: '',
+    }
 
     componentDidUpdate() {
         if (this.state.countries !== this.props.countries) {
@@ -65,11 +66,10 @@ export class TableTest extends React.Component<any> {
         this.setState({
             gridData: gridData,
             countries: this.props.countries
-        })
+        });
     }
 
     handleChange(event: { target: { value: any; }; }) {
-        console.log('set value', event.target.value)
         if (event.target.value) {
             this.setState({
                 option: event.target.value
@@ -77,40 +77,50 @@ export class TableTest extends React.Component<any> {
             return;
         }
         this.setState({
-            option: ''
+            option: '',
+            rangeFrom: 0,
+            rangeTo: 1,
         });
     }
 
-    setStart(event: { target: { value: any; }; }){
-        if(event.target.value)
-        this.setState({
-            rangeFrom: event.target.value
-        })
+    setStart(event: { target: { value: any; }; }) {
+        if (event.target.value)
+            this.setState({
+                rangeFrom: event.target.value
+            })
     }
 
-    setEnd(event: { target: { value: any; }; }){
-        if(event.target.value)
-        this.setState({
-            rangeTo: event.target.value
-        })
+    setEnd(event: { target: { value: any; }; }) {
+        if (event.target.value)
+            this.setState({
+                rangeTo: event.target.value
+            })
     }
 
-    rangedData(raw: any){
+    rangedData(raw: any) {
         let option = this.state.option
         let rangeFrom = this.state.rangeFrom;
         let rangeTo = this.state.rangeTo;
+        if (!option) { return raw; }
+
         let filtered = raw.filter((data: any) => {
-            if(data[option] >= rangeFrom && data[option] <= rangeTo){
-                return true;
-            }
-            return false
+            let matchFrom = rangeFrom ? data[option] >= parseInt(rangeFrom) : true;
+            let matchTo = rangeTo ? data[option] <= parseInt(rangeTo) : true;
+            return matchFrom && matchTo;
         });
-        return filtered
+        return filtered;
+    }
+
+    click() {
+        this.setState({
+            option: '',
+            rangeFrom: '',
+            rangeTo: '',
+        })
     }
 
     render() {
-        // let dataInRange = this.rangedData(this.state.gridData);
-        // console.log(dataInRange)
+        let dataInRange = this.rangedData(this.state.gridData);
         let options = [];
         for (let item of columns) {
             options.push(item);
@@ -130,20 +140,30 @@ export class TableTest extends React.Component<any> {
                             ))}
                         </select>
                     </div>
-                    <input 
-                    placeholder="from"
-                    onChange = {(e) => {this.setStart(e)}}>
+                    <input
+                        type="number"
+                        placeholder="from"
+                        value={this.state.rangeFrom}
+                        onChange={(e) => { this.setStart(e) }}>
                     </input>
-                    <input 
-                    placeholder="to"
-                    onChange = {(e) => {this.setEnd(e)}}>
+                    <input
+                        type="number"
+                        placeholder="to"
+                        value={this.state.rangeTo}
+                        onChange={(e) => { this.setEnd(e) }}>
                     </input>
                 </div>
                 <div className="clearFilters">
-                    <button>Clear filters</button>
+                    <button
+                        onClick={() => {this.click();}}>
+                        Clear filters
+                    </button>
                 </div>
                 <div style={{ height: 600, width: '100%', backgroundColor: 'white' }}>
                     <DataGrid
+                        components={{
+                            NoRowsOverlay: this.noDataMsg
+                        }}
                         sortModel={[
                             {
                                 field: 'country',
@@ -152,11 +172,15 @@ export class TableTest extends React.Component<any> {
                         ]}
                         pageSize={20}
                         columns={columns}
-                        rows={this.state.gridData}
+                        rows={dataInRange}
                     />
                 </div>
             </div>
         )
+    }
+
+    noDataMsg(): any {
+        return <span style={{position: "absolute", top: '50%', left: '50%'}}>No Data</span>;
     }
 
 }

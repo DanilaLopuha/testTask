@@ -27,6 +27,7 @@ class MyDatepicker extends React.Component<any> {
           startDate={this.state.startDate}
           endDate={this.state.endDate}
           minDate={this.state.fixedStartDate}
+          maxDate={this.state.endDate}
         />
         to 
         <DatePicker

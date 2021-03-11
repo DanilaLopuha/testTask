@@ -32,7 +32,6 @@ export class ChartTest extends React.Component<any> {
     }
 
     handleChange(event: { target: { value: any; }; }){
-        console.log('set value', event.target.value)
         if (event.target.value) {
             this.setState({
                 data: this.props.countries[event.target.value],
@@ -51,7 +50,6 @@ export class ChartTest extends React.Component<any> {
             countries.push(country);
         }
         countries = countries.sort();
-        // console.log('render', countries);
         return (
             <div className="card" >
                 <div className="countrySelect">
@@ -67,7 +65,6 @@ export class ChartTest extends React.Component<any> {
                 </div>
                 <Chart 
                 data={this.state.data}> 
-                {/* <ArgumentScale factory={scaleTime}/> */}
                     <ArgumentAxis />
                     <ValueAxis />
                     <LineSeries name="Cases" valueField="cases" argumentField="dateRep" />

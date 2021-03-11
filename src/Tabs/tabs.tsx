@@ -11,9 +11,6 @@ import _ from 'lodash';
 class TabExample extends React.Component<any> {
     constructor(props: any) {
         super(props);
-        const date = new Date();
-        // this.state.startDate.setFullYear(date.getFullYear() - 1, date.getMonth(), date.getDate());
-        // this.state.startDate.setHours(0, 0, 0, 0);
     }
     state = {
         rawData: [] as CovidDataRecord[],
@@ -49,7 +46,6 @@ class TabExample extends React.Component<any> {
         const countries = _.groupBy(data, function (data) {
             return data.countriesAndTerritories;
         });
-        console.log('changed data by date on parent component', data);
         return (
             <div className="tabs">
                 <div className="datePick">

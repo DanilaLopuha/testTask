@@ -22,7 +22,7 @@ export class ChartTest extends React.Component<any> {
     }
 
     componentDidUpdate() {
-        if (this.state.country && this.state.data.length !== this.props.countries[this.state.country].length) {
+        if (this.state.country && this.state.data.length !== this.props.countries[this.state.country].length ) {
             this.setState({
                 dataLength: this.props.data.length,
                 data: this.props.countries[this.state.country]
@@ -46,7 +46,6 @@ export class ChartTest extends React.Component<any> {
     }
 
     render() {
-        console.log('data in charts:', this.state.data)
         let countries = [];
         for(let country in this.props.countries) {
             countries.push(country);
@@ -66,11 +65,13 @@ export class ChartTest extends React.Component<any> {
                     ))}
                     </select>
                 </div>
-                <Chart data={this.state.data}> 
+                <Chart 
+                data={this.state.data}> 
+                {/* <ArgumentScale factory={scaleTime}/> */}
                     <ArgumentAxis />
                     <ValueAxis />
-                    <LineSeries name="Cases" valueField="cases" argumentField="date" />
-                    <LineSeries name="Deaths" valueField="deaths" argumentField="date" />
+                    <LineSeries name="Cases" valueField="cases" argumentField="dateRep" />
+                    <LineSeries name="Deaths" valueField="deaths" argumentField="dateRep" />
                     <Legend position="bottom" ></Legend>
                 </Chart>
             </div>

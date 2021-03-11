@@ -12,14 +12,14 @@ class TabExample extends React.Component<any> {
     constructor(props: any) {
         super(props);
         const date = new Date();
-        this.state.startDate.setFullYear(date.getFullYear() - 1, date.getMonth(), date.getDate());
-        this.state.startDate.setHours(0, 0, 0, 0);
+        // this.state.startDate.setFullYear(date.getFullYear() - 1, date.getMonth(), date.getDate());
+        // this.state.startDate.setHours(0, 0, 0, 0);
     }
     state = {
         rawData: [] as CovidDataRecord[],
         data: [] as CovidDataRecord[],
-        startDate: new Date(),
-        endDate: new Date(),
+        startDate: new Date('12/31/2019'),
+        endDate: new Date('12/14/2020'),
         groupedData: [],
     };
     componentDidMount(): void {
@@ -61,7 +61,10 @@ class TabExample extends React.Component<any> {
                 </div>
                 <Tabs defaultActiveKey="chart">
                     <Tab eventKey="home" title="Table">
-                        <TableTest data={data} />
+                        <TableTest 
+                        data={data}
+                        countries={countries}
+                         />
                         {/* <TestHttpCall /> */}
                     </Tab>
                     <Tab eventKey="chart" title="Chart">
@@ -85,8 +88,6 @@ class TabExample extends React.Component<any> {
     private getFilteredDataItems(raw: CovidDataRecord[]): CovidDataRecord[] {
         let startDate = new Date(this.state.startDate);
         let endDate = new Date(this.state.endDate);
-        // let arythm = Math.abs(startDate - endDate);
-        // let days = arythm / (1000 * 60 * 60 * 24);
         let filtered: CovidDataRecord[] = raw.filter(dataRecord => {
             if (dataRecord.date >= startDate && dataRecord.date <= endDate) {
                 return true;

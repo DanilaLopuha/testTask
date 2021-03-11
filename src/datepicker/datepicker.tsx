@@ -10,7 +10,8 @@ class MyDatepicker extends React.Component<any> {
     super(props)
   };
   state = {
-    fixedDate: new Date(),
+    fixedEndDate: new Date('12/14/2020'),
+    fixedStartDate: new Date('12/31/2019'),
     startDate: this.props.startDate,
     endDate: this.props.endDate,
   };
@@ -25,7 +26,7 @@ class MyDatepicker extends React.Component<any> {
           selectsStart
           startDate={this.state.startDate}
           endDate={this.state.endDate}
-          // minDate={this.state.fixedDate}
+          minDate={this.state.fixedStartDate}
         />
         to 
         <DatePicker
@@ -35,6 +36,7 @@ class MyDatepicker extends React.Component<any> {
           startDate={this.state.startDate}
           endDate={this.state.endDate}
           minDate={this.state.startDate}
+          maxDate={this.state.fixedEndDate}
         />
       </>
     );
